@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Lq0-8m-ujM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="7Zf-0I-16o">
+            <objects>
+                <navigationController id="Lq0-8m-ujM" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="c2i-Gr-ENf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="3FI-Re-dRU" kind="relationship" relationship="rootViewController" id="SSI-Aa-wLG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z9G-hg-DM7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="578" y="113"/>
+        </scene>
+        <!--Регистрация-->
+        <scene sceneID="lIc-JP-VJb">
+            <objects>
+                <viewController id="3FI-Re-dRU" customClass="RegistrationViewController" customModule="BikePoint" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hcX-rb-hvl"/>
+                        <viewControllerLayoutGuide type="bottom" id="oOv-GX-gFB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="arS-gO-fLv">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NPN-Tq-pJe">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Фамилия" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iIG-wl-aEH" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                        <rect key="frame" x="20" y="20" width="335" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="TzE-Xb-oMH"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                                <color key="value" red="0.85043728350000003" green="0.21816034619999999" blue="0.15920260550000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                                <color key="value" red="0.15410047769999999" green="0.41306763889999998" blue="0.69063264130000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Имя" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0DM-lC-rbR" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                        <rect key="frame" x="20" y="80" width="335" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="g3T-5y-Zw3"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                                <color key="value" red="0.85043728350000003" green="0.21816034619999999" blue="0.15920260550000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                                <color key="value" red="0.15410047769999999" green="0.41306763889999998" blue="0.69063264130000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Отчество" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HFl-X0-2A4" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                        <rect key="frame" x="20" y="140" width="335" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="aC6-tx-SYX"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                                <color key="value" red="0.85043728350000003" green="0.21816034619999999" blue="0.15920260550000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                                <color key="value" red="0.15410047769999999" green="0.41306763889999998" blue="0.69063264130000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Телефон" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3GW-7a-mu9" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                        <rect key="frame" x="20" y="220" width="335" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="Bth-fq-G6m"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                                <color key="value" red="0.85043728350000003" green="0.21816034619999999" blue="0.15920260550000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                                <color key="value" red="0.15410047769999999" green="0.41306763889999998" blue="0.69063264130000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="unH-ET-A1i" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                        <rect key="frame" x="20" y="280" width="335" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="Dul-g9-iMG"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                                <color key="value" red="0.85043728350000003" green="0.21816034619999999" blue="0.15920260550000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                                <color key="value" red="0.15410047769999999" green="0.41306763889999998" blue="0.69063264130000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Логин" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t16-K4-Axo" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                        <rect key="frame" x="20" y="360" width="335" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="2f9-re-gBL"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                                <color key="value" red="0.85043728350000003" green="0.21816034619999999" blue="0.15920260550000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                                <color key="value" red="0.15410047769999999" green="0.41306763889999998" blue="0.69063264130000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8mY-nu-mU4" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                        <rect key="frame" x="20" y="420" width="335" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="GPE-6c-yX8"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                                <color key="value" red="0.85043728350000003" green="0.21816034619999999" blue="0.15920260550000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                                <color key="value" red="0.15410047769999999" green="0.41306763889999998" blue="0.69063264130000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Повтор" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zOQ-uG-Kdu" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                        <rect key="frame" x="20" y="480" width="335" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="Adn-ED-obI"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
+                                                <color key="value" red="0.85043728350000003" green="0.21816034619999999" blue="0.15920260550000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
+                                                <color key="value" red="0.15410047769999999" green="0.41306763889999998" blue="0.69063264130000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ry-gB-915">
+                                        <rect key="frame" x="20" y="540" width="335" height="44"/>
+                                        <color key="backgroundColor" red="0.85043728350000003" green="0.21816034619999999" blue="0.15920260550000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="pL6-ra-iXR"/>
+                                        </constraints>
+                                        <state key="normal" title="Соглашение">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="disabled">
+                                            <color key="titleColor" red="0.68888300660000001" green="0.71366006140000005" blue="0.73448425530000006" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                    </button>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ycG-xg-4Bd">
+                                        <rect key="frame" x="335" y="232" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                    <activityIndicatorView hidden="YES" opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="oCV-BY-EPd">
+                                        <rect key="frame" x="335" y="292" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                    <activityIndicatorView hidden="YES" opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xIY-iz-J1R">
+                                        <rect key="frame" x="335" y="372" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="iIG-wl-aEH" firstAttribute="trailing" secondItem="0DM-lC-rbR" secondAttribute="trailing" id="03I-5X-QGs"/>
+                                    <constraint firstItem="iIG-wl-aEH" firstAttribute="centerX" secondItem="NPN-Tq-pJe" secondAttribute="centerX" id="35N-0x-ifd"/>
+                                    <constraint firstItem="0DM-lC-rbR" firstAttribute="top" secondItem="iIG-wl-aEH" secondAttribute="bottom" constant="16" id="866-tW-YLz"/>
+                                    <constraint firstItem="HFl-X0-2A4" firstAttribute="leading" secondItem="3GW-7a-mu9" secondAttribute="leading" id="97K-l3-9AA"/>
+                                    <constraint firstItem="unH-ET-A1i" firstAttribute="leading" secondItem="t16-K4-Axo" secondAttribute="leading" id="AEH-eC-7fZ"/>
+                                    <constraint firstItem="8mY-nu-mU4" firstAttribute="trailing" secondItem="zOQ-uG-Kdu" secondAttribute="trailing" id="DNk-53-SG7"/>
+                                    <constraint firstItem="iIG-wl-aEH" firstAttribute="leading" secondItem="0DM-lC-rbR" secondAttribute="leading" id="Gmi-p9-ezS"/>
+                                    <constraint firstItem="3GW-7a-mu9" firstAttribute="leading" secondItem="unH-ET-A1i" secondAttribute="leading" id="HNV-oQ-hh8"/>
+                                    <constraint firstAttribute="trailing" secondItem="iIG-wl-aEH" secondAttribute="trailing" constant="20" id="HbV-4T-GI2"/>
+                                    <constraint firstItem="t16-K4-Axo" firstAttribute="top" secondItem="unH-ET-A1i" secondAttribute="bottom" constant="36" id="NVf-Wk-gLJ"/>
+                                    <constraint firstItem="8mY-nu-mU4" firstAttribute="leading" secondItem="zOQ-uG-Kdu" secondAttribute="leading" id="Q2W-ys-VFH"/>
+                                    <constraint firstItem="3GW-7a-mu9" firstAttribute="top" secondItem="HFl-X0-2A4" secondAttribute="bottom" constant="36" id="R6C-PZ-tMS"/>
+                                    <constraint firstItem="iIG-wl-aEH" firstAttribute="leading" secondItem="NPN-Tq-pJe" secondAttribute="leading" constant="20" id="RtT-ic-TrI"/>
+                                    <constraint firstAttribute="bottom" secondItem="8ry-gB-915" secondAttribute="bottom" constant="275" id="VOJ-un-jVD"/>
+                                    <constraint firstItem="unH-ET-A1i" firstAttribute="top" secondItem="3GW-7a-mu9" secondAttribute="bottom" constant="16" id="VPb-bn-sjN"/>
+                                    <constraint firstItem="unH-ET-A1i" firstAttribute="trailing" secondItem="t16-K4-Axo" secondAttribute="trailing" id="WVE-9a-xa8"/>
+                                    <constraint firstItem="iIG-wl-aEH" firstAttribute="top" secondItem="NPN-Tq-pJe" secondAttribute="top" constant="20" id="XUb-5O-OkB"/>
+                                    <constraint firstItem="t16-K4-Axo" firstAttribute="leading" secondItem="8mY-nu-mU4" secondAttribute="leading" id="ZPZ-fD-bAZ"/>
+                                    <constraint firstItem="0DM-lC-rbR" firstAttribute="trailing" secondItem="HFl-X0-2A4" secondAttribute="trailing" id="ZyK-6S-V65"/>
+                                    <constraint firstItem="zOQ-uG-Kdu" firstAttribute="leading" secondItem="8ry-gB-915" secondAttribute="leading" id="cEJ-h3-Egc"/>
+                                    <constraint firstItem="3GW-7a-mu9" firstAttribute="trailing" secondItem="unH-ET-A1i" secondAttribute="trailing" id="dSg-P9-h3C"/>
+                                    <constraint firstItem="t16-K4-Axo" firstAttribute="trailing" secondItem="8mY-nu-mU4" secondAttribute="trailing" id="h7n-oI-g9g"/>
+                                    <constraint firstItem="8ry-gB-915" firstAttribute="top" secondItem="zOQ-uG-Kdu" secondAttribute="bottom" constant="16" id="jZK-p0-UEM"/>
+                                    <constraint firstItem="HFl-X0-2A4" firstAttribute="top" secondItem="0DM-lC-rbR" secondAttribute="bottom" constant="16" id="mj5-M5-uty"/>
+                                    <constraint firstItem="8mY-nu-mU4" firstAttribute="top" secondItem="t16-K4-Axo" secondAttribute="bottom" constant="16" id="pK2-f7-B1S"/>
+                                    <constraint firstItem="0DM-lC-rbR" firstAttribute="leading" secondItem="HFl-X0-2A4" secondAttribute="leading" id="raj-bf-Ywx"/>
+                                    <constraint firstItem="zOQ-uG-Kdu" firstAttribute="trailing" secondItem="8ry-gB-915" secondAttribute="trailing" id="sAH-p7-hx3"/>
+                                    <constraint firstItem="zOQ-uG-Kdu" firstAttribute="top" secondItem="8mY-nu-mU4" secondAttribute="bottom" constant="16" id="vzY-51-aKp"/>
+                                    <constraint firstItem="unH-ET-A1i" firstAttribute="centerY" secondItem="NPN-Tq-pJe" secondAttribute="centerY" id="xxc-0u-uaT"/>
+                                    <constraint firstItem="HFl-X0-2A4" firstAttribute="trailing" secondItem="3GW-7a-mu9" secondAttribute="trailing" id="zjT-lv-TP8"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NPN-Tq-pJe" firstAttribute="leading" secondItem="arS-gO-fLv" secondAttribute="leading" id="KoT-pf-Cc7"/>
+                            <constraint firstItem="NPN-Tq-pJe" firstAttribute="bottom" secondItem="oOv-GX-gFB" secondAttribute="top" id="MXQ-Rf-wKh"/>
+                            <constraint firstItem="NPN-Tq-pJe" firstAttribute="top" secondItem="hcX-rb-hvl" secondAttribute="bottom" id="rT0-As-gpv"/>
+                            <constraint firstAttribute="trailing" secondItem="NPN-Tq-pJe" secondAttribute="trailing" id="rZ4-Rh-qky"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Регистрация" id="Gar-PL-eFE"/>
+                    <connections>
+                        <outlet property="agreementButton" destination="8ry-gB-915" id="veu-ll-tsy"/>
+                        <outlet property="scrollView" destination="NPN-Tq-pJe" id="Oad-bS-JiU"/>
+                        <outletCollection property="collectionTextField" destination="iIG-wl-aEH" collectionClass="NSMutableArray" id="FO3-ZE-dHg"/>
+                        <outletCollection property="collectionTextField" destination="0DM-lC-rbR" collectionClass="NSMutableArray" id="hnR-uI-qbR"/>
+                        <outletCollection property="collectionTextField" destination="HFl-X0-2A4" collectionClass="NSMutableArray" id="lco-X1-K39"/>
+                        <outletCollection property="collectionTextField" destination="3GW-7a-mu9" collectionClass="NSMutableArray" id="vr7-ue-xKi"/>
+                        <outletCollection property="collectionTextField" destination="unH-ET-A1i" collectionClass="NSMutableArray" id="ER7-7h-D90"/>
+                        <outletCollection property="collectionTextField" destination="t16-K4-Axo" collectionClass="NSMutableArray" id="MhI-P6-lBA"/>
+                        <outletCollection property="collectionTextField" destination="8mY-nu-mU4" collectionClass="NSMutableArray" id="dD7-ya-tvv"/>
+                        <outletCollection property="collectionTextField" destination="zOQ-uG-Kdu" collectionClass="NSMutableArray" id="1gi-Bv-TUD"/>
+                        <outletCollection property="collectionActivityIndicators" destination="ycG-xg-4Bd" collectionClass="NSMutableArray" id="LV9-ic-QK5"/>
+                        <outletCollection property="collectionActivityIndicators" destination="oCV-BY-EPd" collectionClass="NSMutableArray" id="R1y-AL-hIb"/>
+                        <outletCollection property="collectionActivityIndicators" destination="xIY-iz-J1R" collectionClass="NSMutableArray" id="4fO-0A-nPD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JP7-ix-7Js" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1726" y="113"/>
+        </scene>
+    </scenes>
+</document>
