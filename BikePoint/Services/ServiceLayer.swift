@@ -5,44 +5,197 @@ class ServiceLayer {
     
     static let shared = ServiceLayer()
     
-    let sessionData = SessionData.shared
     
+    func checkRegData( email: String, login: String , phone: String,
+                       completion: @escaping ([Bool]? , Errors?) -> ()) {
+        
+        let phone = String().parsPhone(number: phone)
     
-    func checkRegData(completion: @escaping ([Bool]? , Errors?) -> ()) {
+        let parametrs : [String : Any] = ["email" : email, "login" : login, "phone" : phone]
         
-        let editRegistrationData = sessionData.editRegistrationData
-        
-        let keyEmail = "email"
-        let keyLogin = "login"
-        let keyPhone = "phone"
-        
-        let params = [ keyEmail : editRegistrationData[keyEmail]!,
-                       keyLogin : editRegistrationData[keyLogin]!,
-                       keyPhone : editRegistrationData[keyPhone]! ]
-        
-        Alamofire.request(Router.checkRegData(parametrs: params)).responseJSON{ response in
+        Alamofire.request(Router.checkRegData(parametrs: parametrs)).responseJSON{ response in
             
             switch response.result {
                 
             case .success:
                 
-                let responseData = ResponceData(checkRegData: response.result.value as! NSDictionary)
+                let jsonDict = response.result.value as! NSDictionary
                 
-                if responseData.statusResponce! {
+                let statusResponce = jsonDict.value(forKey: "ok") as? Bool
                 
-                    completion(responseData.availableRegistrationData, nil)
-                
+                if statusResponce! {
+                    
+                    let availableRegistrationData = jsonDict.value(forKey: "available") as? [Bool]
+                    
+                    completion(availableRegistrationData, nil)
+                    
                 } else {
-                
-                    completion(nil, responseData.error)
+                    
+                    let error = Errors(rawValue: jsonDict.value(forKey: "error") as! String)
+                    
+                    completion(nil, error)
                 }
                 
             case .failure:
                 
                 completion( nil, Errors.internetNotConnect)
-                
             }
         }
     }
     
+    func requestSmsCode( phone: String,
+                         completion: @escaping (Int? , Errors?) -> ()) {
+        
+        let phone = String().parsPhone(number: phone)
+        
+        let parametrs : [String : Any] = ["phone" : phone]
+        
+        Alamofire.request(Router.requestSmsCode(parametrs: parametrs)).responseJSON{ response in
+            
+            switch response.result {
+                
+            case .success:
+                
+                let jsonDict = response.result.value as! NSDictionary
+                
+                let statusResponce = jsonDict.value(forKey: "ok") as? Bool
+                
+                if statusResponce! {
+                    
+                    let sessionNumber = jsonDict.value(forKey: "session") as? Int
+                    
+                    completion(sessionNumber, nil)
+                    
+                } else {
+                    
+                    let error = Errors(rawValue: jsonDict.value(forKey: "error") as! String)
+                    
+                    completion(nil, error)
+                }
+                
+            case .failure:
+                
+                completion( nil, Errors.internetNotConnect)
+            }
+        }
+    }
+    
+    func setRegData( email: String, login: String, phone: String,
+                     session: Int, code: Int, password: String,
+                     fullname: String, completion: @escaping (String? , Errors?) -> ()) {
+        
+        let phone = String().parsPhone(number: phone)
+        
+        let parametrs : [String : Any] = [ "email" : email, "login" : login, "phone" : phone,
+                                           "session" : session, "code" : code, "password" : password,
+                                           "fullname" : fullname ]
+        
+        Alamofire.request(Router.setRegData(parametrs: parametrs)).responseJSON{ response in
+            
+            switch response.result {
+                
+            case .success:
+                
+                let jsonDict = response.result.value as! NSDictionary
+                
+                let statusResponce = jsonDict.value(forKey: "ok") as? Bool
+                
+                if statusResponce! {
+                    
+                    let userToken = jsonDict.value(forKey: "userToken") as? String
+                    
+                    completion(userToken, nil)
+                    
+                } else {
+                    
+                    let error = Errors(rawValue: jsonDict.value(forKey: "error") as! String)
+                    
+                    completion(nil, error)
+                }
+                
+            case .failure:
+                
+                completion( nil, Errors.internetNotConnect)
+            }
+        }
+    }
+    
+    func restorePassword ( login: String, phone: String, completion: @escaping (Errors?) -> ()) {
+        
+        let phone = String().parsPhone(number: phone)
+        
+        let parametrs : [String : Any] = ["login" : login, "phone" : phone]
+        
+        Alamofire.request(Router.restorePassword(parametrs: parametrs)).responseJSON{ response in
+            
+            switch response.result {
+                
+            case .success:
+                
+                let jsonDict = response.result.value as! NSDictionary
+                
+                let statusResponce = jsonDict.value(forKey: "ok") as? Bool
+                
+                if statusResponce! {
+                    
+                    let done = jsonDict.value(forKey: "done") as? Bool
+                    
+                    if done! {
+                    
+                        completion(nil)
+                    
+                    } else {
+                    
+                        completion(Errors.restoreFailed)
+                    }
+                    
+                } else {
+                    
+                    let error = Errors(rawValue: jsonDict.value(forKey: "error") as! String)
+                    
+                    completion(error)
+                }
+                
+            case .failure:
+                
+                completion( Errors.internetNotConnect )
+            }
+        }
+    }
+    
+    func getAuthToken( login: String, password: String, completion: @escaping (String?, String?, Errors?) -> ()) {
+        
+        let parametrs : [String : Any] = ["login" : login, "password" : password]
+        
+        Alamofire.request(Router.getAuthToken(parametrs: parametrs)).responseJSON{ response in
+            
+            switch response.result {
+                
+            case .success:
+                
+                let jsonDict = response.result.value as! NSDictionary
+                
+                let statusResponce = jsonDict.value(forKey: "ok") as? Bool
+                
+                if statusResponce! {
+                    
+                    let userToken = jsonDict.value(forKey: "userToken") as? String
+                    
+                    let email = jsonDict.value(forKey: "email") as? String
+                    
+                    completion(userToken, email, nil)
+                    
+                } else {
+                    
+                    let error = Errors(rawValue: jsonDict.value(forKey: "error") as! String)
+                    
+                    completion(nil, nil, error)
+                }
+                
+            case .failure:
+                
+                completion( nil, nil, Errors.internetNotConnect)
+            }
+        }
+    }
 }

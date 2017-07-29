@@ -2,8 +2,30 @@
 import UIKit
 import PhoneNumberKit
 
-class RegistrationViewController: UIViewController, UITextFieldDelegate {
+enum ListRegData: Int {
+    
+    case surname = 0, name, patronymic, phone, email, login, password, checkPassword, session, code
+    
+    var key : String {
+        
+        switch self {
+            
+        case .surname: return "surname"
+        case .name: return "name"
+        case .patronymic: return "patronymic"
+        case .phone: return "phone"
+        case .email: return "email"
+        case .login: return "login"
+        case .password: return "password"
+        case .checkPassword: return "checkPassword"
+        case .session: return "session"
+        case .code: return "code"
+        }
+    }
+}
 
+class RegistrationViewController: UIViewController, UITextFieldDelegate {
+    
     @IBOutlet var scrollView: UIScrollView!
     
     @IBOutlet var collectionTextField: [UITextField]!
@@ -12,11 +34,25 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var agreementButton: UIButton!
     
-    let NotificationCompleteRegistrationData = "NotificationCompleteRegistrationData"
+    
+    var registrationData : [String : Any?] = [:] {
+    
+        willSet(newData) {
+
+            if newData.values.count == 8 {
+                
+                agreementButton.isEnabled = true
+                
+            } else {
+            
+                agreementButton.isEnabled = false
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         scrollView.isScrollEnabled = false
         
         for textField in collectionTextField {
@@ -31,19 +67,11 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate {
         agreementButton.isEnabled = false
         
         self.hideKeyboardWhenTappedAround()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(isEnabledAgreementButton), name: NSNotification.Name(rawValue: NotificationCompleteRegistrationData), object: nil)
-    
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-    }
-    
-    func isEnabledAgreementButton(notification: NSNotification) {
-    
-        agreementButton.isEnabled = (notification.object != nil)
     }
     
     
@@ -70,22 +98,23 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate {
         
         let tag = textField.tag
         
+        let textFieldType = ListRegData(rawValue: tag)
+        
         let originY = textField.frame.origin.y
         
-        switch tag {
+        switch textFieldType!{
             
-        case (0...2):
+        case .surname, .name, .patronymic:
             pointInScroll = .zero
             
-        case 7:
+        case .checkPassword:
             pointInScroll = CGPoint(x: 0, y: originY - collectionTextField[3].frame.origin.y)
             
         default:
             pointInScroll = CGPoint(x: 0, y: originY - collectionTextField[2].frame.origin.y)
-            
         }
         
-        if tag == 3  && textField.text == "" {
+        if textFieldType! == .phone  && textField.text == "" {
             
             textField.text = "+375"
         }
@@ -101,25 +130,26 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate {
         
         scrollView.isScrollEnabled = false
         
-        switch textField.tag {
+        let tag = textField.tag
+        
+        switch ListRegData(rawValue: tag)! {
             
-        case 0, 1, 2, 4, 5 : checkData(textField: textField) { text in
+        case .surname, .name, .patronymic, .email, .login : checkData(textField: textField) { text in
             
             return (text?.characters.count)! >= 2 ? true : false
             }
             
-        case 3: checkData(textField: textField) { text in
+        case .phone : checkData(textField: textField) { text in
             
             return (text?.characters.count)! == 17 ? true : false
             }
             
-        case 6, 7: checkData(textField: textField) { text in
+        case .password, .checkPassword : checkData(textField: textField) { text in
             
             return (text?.characters.count)! >= 8 ? true : false
             }
             
         default: break
-            
         }
     }
     
@@ -130,7 +160,9 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate {
         
         let countCharacters = candidateText.characters.count
         
-        if textField.tag == 3 {
+        let tag = textField.tag
+        
+        if ListRegData(rawValue: tag)! == .phone {
             
             if countCharacters > 3 && countCharacters <= 17 {
                 
@@ -149,77 +181,80 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate {
     
     func checkData(textField: UITextField, textOptions: (String?) -> Bool) {
         
-        let keys = ["surname", "name", "patronymic", "phone", "email", "login", "password", "checkPassword"]
-        
-        let sessionData = SessionData.shared
-
         let serviceLayer = ServiceLayer.shared
-
+        
         let tag = textField.tag
         
         var text = textField.text
         
-        let key = keys[tag]
+        let textFieldType = ListRegData(rawValue: tag)
+        
+        let key = ListRegData(rawValue: tag)?.key
+        
+        registrationData[key!] = nil
+        
+        switch textFieldType! {
 
-        sessionData.editRegistrationData[key] = ""
-
-        switch tag {
+        case .surname where textOptions(text),
+             .name where textOptions(text),
+             .patronymic where textOptions(text):
             
-        case (0...2) where textOptions(text):
-            
-            sessionData.editRegistrationData[key] = text
+            registrationData[key!] = text
             
             textField.rightView = UIImageView(image: #imageLiteral(resourceName: "okImage"))
             
-        case (3...5) where textOptions(text):
+        case .phone where textOptions(text),
+             .email where textOptions(text),
+             .login where textOptions(text):
             
-            let location = [ 3 : 2, 4 : 0, 5 : 1 ]
+            let location  = [ ListRegData.phone : 2, ListRegData.email : 0, ListRegData.login : 1 ]
             
-            if tag == 3 {
-                
-                text = String().parsPhone(number: text!)
-            }
-            
-            sessionData.editRegistrationData[key] = text
+            registrationData[key!] = text
             
             collectionActivityIndicators[tag - 3].startAnimating()
             
-            serviceLayer.checkRegData { (available, error) in
-                
-                self.collectionActivityIndicators[tag - 3].stopAnimating()
-                
-                if let error = error {
-                
-                    self.showAlertControllerFor(message: error)
-                    
-                } else  if (available?[location[tag]!])! {
-                    
-                    textField.rightView = UIImageView(image: #imageLiteral(resourceName: "okImage"))
-                    
-                } else {
-                    
-                    sessionData.editRegistrationData[key] = ""
-                    
-                    textField.rightView = UIImageView(image: #imageLiteral(resourceName: "cancelImage"))
-                }
-            }
+            serviceLayer.checkRegData(email: ((view.viewWithTag(ListRegData.email.rawValue) as? UITextField)?.text)!,
+                                      login: ((view.viewWithTag(ListRegData.login.rawValue) as? UITextField)?.text)!,
+                                      phone: ((view.viewWithTag(ListRegData.phone.rawValue) as? UITextField)?.text)!,
+                                      completion: { (available, error) in
+                                        
+                                        self.collectionActivityIndicators[tag - 3].stopAnimating()
+                                        
+                                        let position = location[textFieldType!]
+                                        
+                                        if let error = error {
+                                            
+                                            self.showAlertControllerFor(message: error)
+                                            
+                                        } else  if (available?[position!])! {
+                                            
+                                            textField.rightView = UIImageView(image: #imageLiteral(resourceName: "okImage"))
+                                            
+                                        } else {
+                                            
+                                            self.registrationData[key!] = nil
+                                            
+                                            textField.rightView = UIImageView(image: #imageLiteral(resourceName: "cancelImage"))
+                                        }
+            })
             
-        case (6...7) where textOptions(text):
+        case .password where textOptions(text),
+             .checkPassword where textOptions(text):
             
-            if tag == 6 {
+            if (textFieldType!) == .password {
                 
-                sessionData.editRegistrationData[key] = text
+                registrationData[key!] = text
                 
                 textField.rightView = UIImageView(image: #imageLiteral(resourceName: "okImage"))
                 
-            } else if text == collectionTextField[6].text {
+            } else if text == collectionTextField[ListRegData.password.rawValue].text {
                 
-                sessionData.editRegistrationData[key] = text
+                registrationData[key!] = text
                 
                 textField.rightView = UIImageView(image: #imageLiteral(resourceName: "okImage"))
-                    
+                
             } else {
-                    
+                
                 fallthrough
             }
             
@@ -231,6 +266,18 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate {
             
             textField.rightView = nil
             
+        }
+    }
+    
+    //MARK: - Seque
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "ContractViewController" {
+        
+            let contractViewController = segue.destination as! ContractViewController
+            
+            contractViewController.registrationData = self.registrationData
         }
     }
 }

@@ -48,20 +48,3 @@ extension UIViewController {
     }
 }
 
-extension Array {
-    
-    func checkForComplete(array: Array) -> Bool {
-        
-        var bool = true
-        
-        for i in array {
-            
-            if String(describing: i) == "" {
-                
-                bool = false
-            }
-        }
-        
-        return bool
-    }
-}
