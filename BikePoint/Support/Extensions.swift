@@ -31,6 +31,24 @@ extension UIViewController {
     }
 }
 
+
+extension UIViewController {
+    
+    func showAlertControllerFor(message: Messages) {
+        
+        SVProgressHUD.dismiss()
+        
+        let controller = UIAlertController(title: nil, message: message.message , preferredStyle: .alert)
+        
+        let exitAction = UIAlertAction(title: "ok", style: .default, handler: nil)
+        
+        controller.addAction(exitAction)
+        
+        present(controller, animated: true, completion: nil)
+        
+    }
+}
+
 extension UIViewController {
     
     func hideKeyboardWhenTappedAround() {
@@ -47,4 +65,34 @@ extension UIViewController {
         view.endEditing(true)
     }
 }
+
+extension UIStoryboard {
+    
+    open class var signIn: UIStoryboard {
+        get {
+            return UIStoryboard(name: "SignIn", bundle: nil)
+        }
+    }
+    
+    open class var main: UIStoryboard {
+        get {
+            return UIStoryboard(name: "Main", bundle: nil)
+        }
+    }
+}
+
+extension UIViewController {
+    
+    static func topViewController() -> UIViewController? {
+        
+        var topViewController = UIApplication.shared.keyWindow?.rootViewController!
+        
+        while topViewController?.presentedViewController != nil {
+            
+            topViewController = topViewController?.presentedViewController
+        }
+        return topViewController
+    }
+}
+
 

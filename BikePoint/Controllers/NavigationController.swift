@@ -16,12 +16,11 @@ class NavigationController: UINavigationController {
         navigationBar.tintColor = UIColor.white
         
         navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
 }

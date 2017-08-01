@@ -2,25 +2,19 @@
 import Foundation
 
 class SessionData {
-
+    
     static let shared = SessionData()
     
+    let userDefaults = UserDefaults.standard
     
-    
-    var editRegistrationData = [ "surname" : "", "name" : "", "patronymic" : "",
-                                 "phone" : "", "email" : "",
-                                 "login" : "", "password" : "", "checkPassword" : ""] {
+    var userToken: String? {
         
-        willSet(value){
-            
-            if Array().checkForComplete(array: Array(value.values)) {
-                
-               
-                
-            } else {
-                
-                
-            }
+        get{
+            return userDefaults.string(forKey: "keyUserToken")
+        }
+        
+        set{
+            userDefaults.set(newValue, forKey: "keyUserToken")
         }
     }
 }

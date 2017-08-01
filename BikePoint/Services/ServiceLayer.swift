@@ -120,7 +120,7 @@ class ServiceLayer {
         }
     }
     
-    func restorePassword ( login: String, phone: String, completion: @escaping (Errors?) -> ()) {
+    func restorePassword ( login: String, phone: String, completion: @escaping (Messages?, Errors?) -> ()) {
         
         let phone = String().parsPhone(number: phone)
         
@@ -142,23 +142,23 @@ class ServiceLayer {
                     
                     if done! {
                     
-                        completion(nil)
+                        completion(Messages.successPasswordRestore, nil)
                     
                     } else {
                     
-                        completion(Errors.restoreFailed)
+                        completion(nil, Errors.restoreFailed)
                     }
                     
                 } else {
                     
                     let error = Errors(rawValue: jsonDict.value(forKey: "error") as! String)
                     
-                    completion(error)
+                    completion(nil, error)
                 }
                 
             case .failure:
                 
-                completion( Errors.internetNotConnect )
+                completion(nil, Errors.internetNotConnect )
             }
         }
     }
@@ -195,6 +195,50 @@ class ServiceLayer {
             case .failure:
                 
                 completion( nil, nil, Errors.internetNotConnect)
+            }
+        }
+    }
+    
+    func getStationInfo( completion: @escaping (StationInfo? ,Errors?) -> ()) {
+        
+        Alamofire.request(Router.getStationInfo).responseJSON{ response in
+            
+            switch response.result {
+                
+            case .success:
+                
+                let jsonDict = response.result.value as! NSDictionary
+                
+                let statusResponce = jsonDict.value(forKey: "ok") as? Bool
+                
+                if statusResponce! {
+                    
+                    let addresses = (jsonDict.value(forKey: "addresses") as! [String])
+                    
+                    let latitudes = (jsonDict.value(forKey: "latitudes") as! [Double])
+                    
+                    let longitudes = (jsonDict.value(forKey: "longitudes") as! [Double])
+                    
+                    let busySlots = (jsonDict.value(forKey: "busySlots") as! [Int])
+                    
+                    let freeSlots = (jsonDict.value(forKey: "freeSlots") as! [Int])
+                    
+                    let stationInfo = StationInfo(addresses: addresses, latitudes: latitudes,
+                                                  longitudes: longitudes, busyClots: busySlots,
+                                                  freeSlots: freeSlots)
+                    
+                    completion(stationInfo, nil)
+                    
+                } else {
+                    
+                    let error = Errors(rawValue: jsonDict.value(forKey: "error") as! String)
+                    
+                    completion(nil, error)
+                }
+                
+            case .failure:
+                
+                completion(nil, Errors.internetNotConnect)
             }
         }
     }

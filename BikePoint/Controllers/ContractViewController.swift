@@ -89,7 +89,7 @@ class ContractViewController: UIViewController, UIScrollViewDelegate, UITextFiel
                 
                 self.showAlertControllerFor(message: error)
                 
-            } else  {
+            } else if let sessionNumber = sessionNumber  {
                 
                 self.registrationData[ListRegData.session.key] = sessionNumber
                 self.showAlertControllerForEnterSmsCode()
@@ -111,7 +111,7 @@ class ContractViewController: UIViewController, UIScrollViewDelegate, UITextFiel
         }
         
     
-        SVProgressHUD.show()
+        SVProgressHUD.show(withStatus: "Подождите пожалуйста, Bike Point регистрирует акаунт")
         
         serviceLayer.setRegData(email: registrationData[ListRegData.email.key] as! String,
                                 login: registrationData[ListRegData.login.key] as! String,
@@ -128,9 +128,13 @@ class ContractViewController: UIViewController, UIScrollViewDelegate, UITextFiel
                                         
                                         self.showAlertControllerFor(message: error)
                                         
-                                    } else  {
+                                    } else if let userToken = userToken  {
                                         
-                                        self.performSegue(withIdentifier: "MainViewController", sender: nil)
+                                        SessionData.shared.userToken = userToken
+                                        
+                                        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                                        let mainVC = mainStoryboard.instantiateViewController(withIdentifier: String(describing: MainViewController.self))
+                                        self.navigationController?.setViewControllers([mainVC], animated: true)
                                     }
         })
     }

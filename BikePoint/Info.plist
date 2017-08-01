@@ -23,7 +23,9 @@
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
+	<string>SignIn</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>BikePoint использует Вашу геолакацию для прокладки маршрута</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

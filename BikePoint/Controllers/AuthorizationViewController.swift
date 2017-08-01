@@ -107,7 +107,7 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
             textField.resignFirstResponder()
             
         case ListAutData.loginForRestore.rawValue:
-            alertController?.textFields?.first(where: { $0.tag == 3 })?.becomeFirstResponder()
+            alertController?.textFields?.first(where: { $0.tag == ListAutData.phoneForRestore.rawValue })?.becomeFirstResponder()
             return false
             
         case ListAutData.phoneForRestore.rawValue:
@@ -121,6 +121,11 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         scrollView.isScrollEnabled = true
+        
+        if textField.tag == ListAutData.phoneForRestore.rawValue && textField.text == "" {
+        
+            textField.text = "+375"
+        }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
@@ -199,7 +204,6 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
         alertController.addTextField(configurationHandler: { textField in
             
             textField.placeholder = "Введите телефон"
-            textField.text = "+375"
             textField.tag = ListAutData.phoneForRestore.rawValue
             textField.rightViewMode = .always
             textField.delegate = self
@@ -210,20 +214,8 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
         
         let okAction = UIAlertAction(title: "Ok", style: .default, handler: { [unowned self] action in
             
-            SVProgressHUD.show(withStatus: "Подождите пожалуйста, Bike Point востанавливает пароль")
-            
-            self.serviceLayer.restorePassword(
-                login: (alertController.textFields?[ListAutData.loginForRestore.rawValue].text)!,
-                phone: (alertController.textFields?[ListAutData.phoneForRestore.rawValue].text)!,
-                completion: { error in
-                    
-                    if let error = error {
-                        
-                        self.showAlertControllerFor(message: error)
-                    }
-            })
+            self.restorePassword()
         })
-        
         
         alertController.addAction(cancelAction)
         
@@ -239,6 +231,15 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
         let tag = textField.tag
         
         let text = textField.text
+        
+        if tag == ListAutData.login.rawValue || tag == ListAutData.password.rawValue {
+            
+            authorizationData[(ListAutData(rawValue: tag)?.key)!] = nil
+        
+        } else {
+        
+            restorePasswordData[(ListAutData(rawValue: tag)?.key)!] = nil
+        }
         
         switch ListAutData(rawValue: tag)! {
             
@@ -272,11 +273,63 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
         }
         
     }
+    
+    func restorePassword() {
+        
+        SVProgressHUD.show(withStatus: "Подождите пожалуйста, Bike Point востанавливает пароль")
+        
+        self.serviceLayer.restorePassword(
+            login: (self.restorePasswordData[ListAutData.loginForRestore.key]) as! String,
+            phone: (self.restorePasswordData[ListAutData.phoneForRestore.key]) as! String,
+            completion: { messages, error in
+                
+                SVProgressHUD.dismiss()
+                
+                if let error = error {
+                    
+                    self.showAlertControllerFor(message: error)
+                    
+                } else if let messages = messages {
+                    
+                    self.showAlertControllerFor(message: messages)
+                }
+        })
+    }
+    
+    func getAutToken() {
+        
+        SVProgressHUD.show(withStatus: "Подождите пожалуйста, Bike Point авторизирует акаунт")
+        
+        serviceLayer.getAuthToken(login: authorizationData[ListAutData.login.key] as! String,
+                                  password: authorizationData[ListAutData.password.key] as! String,
+                                  completion: { userToken, email, error in
+                                    
+                                    SVProgressHUD.dismiss()
+                                    
+                                    if let error = error {
+                                        
+                                        self.showAlertControllerFor(message: error)
+                                        
+                                    } else if let userToken = userToken {
+                                    
+                                        SessionData.shared.userToken = userToken
+                                        
+                                        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                                        let mainVC = mainStoryboard.instantiateViewController(withIdentifier: String(describing: MainViewController.self))
+                                        self.navigationController?.setViewControllers([mainVC], animated: true)
+                                    }
+        })
+    }
 
     //MARK: - Actions
 
     @IBAction func actionResstorePassword(_ sender: Any) {
     
         showAlertControllerForResstorePassword()
+    }
+    
+    @IBAction func actionSignInButton(_ sender: Any) {
+        
+        getAutToken()
     }
 }

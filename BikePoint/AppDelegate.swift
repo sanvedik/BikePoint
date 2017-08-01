@@ -15,7 +15,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+//        SessionData.shared.userToken = nil
+        
+        var initialVC : UIViewController?
+        
+        if (SessionData.shared.userToken != nil) {
+        
+            initialVC = UIStoryboard.main.instantiateViewController(withIdentifier: "NavigationController" )
+            
+        } else {
+        
+            initialVC = UIStoryboard.signIn.instantiateViewController(withIdentifier: "NavigationController")
+        }
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        
+        window?.rootViewController = initialVC
+        
+        window?.makeKeyAndVisible()
+        
         return true
     }
 
@@ -40,7 +59,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) ->
+        
+        UIInterfaceOrientationMask {
+            
+        if let navVC = UIViewController.topViewController() as? UINavigationController,
+            navVC.topViewController is MainViewController {
+            
+            return .all
+            
+        } else {
+            
+            return .portrait
+        }
+    }
 }
 

@@ -12,8 +12,6 @@ enum Errors: String {
     
     case restoreFailed
     
-    case regionCodeFailure
-    
     var title : String {
         
         switch self {
@@ -38,9 +36,6 @@ enum Errors: String {
             
         case .restoreFailed:
             return "Ошибка Востановления."
-            
-        case .regionCodeFailure:
-            return "Неверный региональный код"
             
         }
     }
@@ -69,9 +64,6 @@ enum Errors: String {
             
         case .restoreFailed:
             return "Проверьте правильность введеных данных."
-            
-        case .regionCodeFailure:
-            return "Только региональные коды беларуси (25, 29, 33, 44)"
             
         }
     }
