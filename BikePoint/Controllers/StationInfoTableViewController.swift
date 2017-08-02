@@ -24,8 +24,6 @@ class StationInfoTableViewController: UIViewController, UITableViewDataSource, U
             delegate?.requestStationInfo()
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(tableView.reloadData), name:successfulReceptionStationInfo, object: nil)
-       
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,6 +90,5 @@ class StationInfoTableViewController: UIViewController, UITableViewDataSource, U
         
         return 8
     }
-    
     
 }

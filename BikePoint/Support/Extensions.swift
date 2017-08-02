@@ -1,6 +1,7 @@
 
 import Foundation
 import SVProgressHUD
+import MapKit
 
 extension String {
     
@@ -92,6 +93,24 @@ extension UIViewController {
             topViewController = topViewController?.presentedViewController
         }
         return topViewController
+    }
+}
+
+extension UIView {
+    
+    func superAnnotationView() -> MKAnnotationView? {
+        
+        if (self.superview?.isKind(of: MKAnnotationView.self))!  {
+        
+            return self.superview as? MKAnnotationView
+        }
+        
+        if (self.superview == nil) {
+        
+            return nil
+        }
+        
+        return self.superview?.superAnnotationView()
     }
 }
 

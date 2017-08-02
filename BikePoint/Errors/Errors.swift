@@ -12,6 +12,8 @@ enum Errors: String {
     
     case restoreFailed
     
+    case locationFailed
+    
     var title : String {
         
         switch self {
@@ -36,6 +38,9 @@ enum Errors: String {
             
         case .restoreFailed:
             return "Ошибка Востановления."
+            
+        case .locationFailed:
+            return "Ошибка определения местоположения."
             
         }
     }
@@ -64,6 +69,9 @@ enum Errors: String {
             
         case .restoreFailed:
             return "Проверьте правильность введеных данных."
+            
+        case .locationFailed:
+            return "Обратитесь в службу технической поддержки."
             
         }
     }

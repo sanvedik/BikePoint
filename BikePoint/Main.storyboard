@@ -221,6 +221,7 @@
                     <tabBarItem key="tabBarItem" title="карта" image="mapImage" id="tQo-ww-IPh"/>
                     <connections>
                         <outlet property="mapView" destination="x10-b9-bv6" id="iMv-7O-yBR"/>
+                        <segue destination="n3l-4T-Tss" kind="show" identifier="StationInfoTableViewController" id="ufG-Ys-tcB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x0x-iL-938" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -257,4 +258,7 @@
         <image name="tablImage" width="20" height="20"/>
         <image name="zoomImag" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="ufG-Ys-tcB"/>
+    </inferredMetricsTieBreakers>
 </document>
