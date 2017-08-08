@@ -199,7 +199,7 @@ class ServiceLayer {
         }
     }
     
-    func getStationInfo( completion: @escaping (StationInfo? ,Errors?) -> ()) {
+    func getStationInfo( completion: @escaping (StationsInfo? ,Errors?) -> ()) {
         
         Alamofire.request(Router.getStationInfo).responseJSON{ response in
             
@@ -223,7 +223,7 @@ class ServiceLayer {
                     
                     let freeSlots = (jsonDict.value(forKey: "freeSlots") as! [Int])
                     
-                    let stationInfo = StationInfo(addresses: addresses, latitudes: latitudes,
+                    let stationInfo = StationsInfo(addresses: addresses, latitudes: latitudes,
                                                   longitudes: longitudes, busyClots: busySlots,
                                                   freeSlots: freeSlots)
                     

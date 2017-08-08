@@ -34,8 +34,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = initialVC
         
         window?.makeKeyAndVisible()
+        // я вообще невтупляю)))
+//        LocationManager.shared.addObserver(self, forKeyPath: "currentLocation",
+//                                           options: [.new, .initial], context: nil)
         
         return true
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        print(keyPath ?? "UNKNOWN")
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

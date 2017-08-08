@@ -23,6 +23,9 @@
 		1F60DA421F2A7C32008052D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F60DA411F2A7C32008052D2 /* Assets.xcassets */; };
 		1F60DA451F2A7C32008052D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F60DA431F2A7C32008052D2 /* LaunchScreen.storyboard */; };
 		1FB3F4791F308C24002FD3F5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FB3F4781F308C24002FD3F5 /* CoreLocation.framework */; };
+		1FB3F47D1F334B20002FD3F5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB3F47C1F334B20002FD3F5 /* LocationManager.swift */; };
+		1FBD179B1F38E0260090FEC8 /* alphabet40.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FBD17991F38E0260090FEC8 /* alphabet40.png */; };
+		1FBD179C1F38E0260090FEC8 /* alphabet60.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FBD179A1F38E0260090FEC8 /* alphabet60.png */; };
 		1FD05C121F2CF6F2000AD457 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD05C111F2CF6F2000AD457 /* NavigationController.swift */; };
 		1FD05C151F2CF86E000AD457 /* login_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FD05C131F2CF86E000AD457 /* login_background@2x.png */; };
 		1FD05C161F2CF86E000AD457 /* login_background@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FD05C141F2CF86E000AD457 /* login_background@3x.png */; };
@@ -78,6 +81,9 @@
 		1F60DA441F2A7C32008052D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1F60DA461F2A7C32008052D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		1FB3F4781F308C24002FD3F5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		1FB3F47C1F334B20002FD3F5 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		1FBD17991F38E0260090FEC8 /* alphabet40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alphabet40.png; sourceTree = "<group>"; };
+		1FBD179A1F38E0260090FEC8 /* alphabet60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alphabet60.png; sourceTree = "<group>"; };
 		1FD05C111F2CF6F2000AD457 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		1FD05C131F2CF86E000AD457 /* login_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_background@2x.png"; sourceTree = "<group>"; };
 		1FD05C141F2CF86E000AD457 /* login_background@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_background@3x.png"; sourceTree = "<group>"; };
@@ -142,6 +148,7 @@
 			children = (
 				1FECBCB31F2DC68100A85889 /* SessionData.swift */,
 				1FF9B3951F2DEE180095A30D /* StationInfo.swift */,
+				1FB3F47C1F334B20002FD3F5 /* LocationManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -206,6 +213,8 @@
 				1FF9B3A21F2E014F0095A30D /* zoomImag90.png */,
 				1FF9B3991F2DFED70095A30D /* pointImage40.png */,
 				1FF9B39A1F2DFED70095A30D /* pointImage60.png */,
+				1FBD17991F38E0260090FEC8 /* alphabet40.png */,
+				1FBD179A1F38E0260090FEC8 /* alphabet60.png */,
 				1FF9B39B1F2DFED70095A30D /* zoomImage40.png */,
 				1FF9B39C1F2DFED70095A30D /* zoomImage60.png */,
 				1FECBCBB1F2DE38100A85889 /* mapImage40.png */,
@@ -403,6 +412,7 @@
 				1FF9B3AB1F2E0C4E0095A30D /* adressImage.png in Resources */,
 				1F162F5D1F2AEBFB00C1DB6B /* okImage40.png in Resources */,
 				1FECBCC01F2DE38100A85889 /* mapImage60.png in Resources */,
+				1FBD179B1F38E0260090FEC8 /* alphabet40.png in Resources */,
 				1FECBCB61F2DC89C00A85889 /* Main.storyboard in Resources */,
 				1FF9B3B51F2E0F200095A30D /* finishImage40.png in Resources */,
 				1F162F5B1F2AEBFB00C1DB6B /* cancelImage40.png in Resources */,
@@ -414,6 +424,7 @@
 				1FD05C151F2CF86E000AD457 /* login_background@2x.png in Resources */,
 				1FECBCC21F2DE38100A85889 /* tablImage60.png in Resources */,
 				1FF9B39F1F2DFED70095A30D /* zoomImage40.png in Resources */,
+				1FBD179C1F38E0260090FEC8 /* alphabet60.png in Resources */,
 				1FF9B3A31F2E014F0095A30D /* zoomImag60.png in Resources */,
 				1F60DA401F2A7C32008052D2 /* SignIn.storyboard in Resources */,
 			);
@@ -491,6 +502,7 @@
 				1FD05C1B1F2DB37D000AD457 /* Messages.swift in Sources */,
 				1F162F531F2A7F9900C1DB6B /* ServiceLayer.swift in Sources */,
 				1F162F691F2CB2A900C1DB6B /* ContractViewController.swift in Sources */,
+				1FB3F47D1F334B20002FD3F5 /* LocationManager.swift in Sources */,
 				1FF9B3B81F2E12880095A30D /* StationInfoTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
